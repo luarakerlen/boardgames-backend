@@ -6,6 +6,17 @@ A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma 
 
 ---
 
+## Índice
+
+- [Funcionalidades](#funcionalidades)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Como executar](#como-executar)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Autora](#👩🏽‍💻-autora)
+
+---
+
 ## Funcionalidades
 
 - Adicionar novos jogos de tabuleiro.
@@ -90,6 +101,6 @@ Antes de começar, certifique-se de ter os seguintes itens instalados:
 Feito com ❤️ por <a href="https://www.linkedin.com/in/luarakerlen/" target="_blank"><b>Luara Kerlen</b></a> <a href="https://www.linkedin.com/in/luarakerlen/" title="Luara Kerlen"></a>
 <br>Entre em contato!
 
-[![Twitter Badge](https://img.shields.io/twitter/url?label=%40luarakerlen&style=social&url=https%3A%2F%2Ftwitter.com%2Fluarakerlen)](https://twitter.com/luarakerlen)
 [![Linkedin Badge](https://img.shields.io/badge/-Luara%20Kerlen-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/luarakerlen/)](https://www.linkedin.com/in/luarakerlen/)
 [![Gmail Badge](https://img.shields.io/badge/-luarakerlen12@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:luarakerlen12@gmail.com)](mailto:luarakerlen12@gmail.com)
+[![Instagram Badge](https://img.shields.io/badge/Luara%20Kerlen-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/luarakerlen)
