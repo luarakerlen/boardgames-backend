@@ -10,8 +10,7 @@ class BoardgameSchema(BaseModel):
     min_players: int = 2
     max_players: int = 4
     image_url: Optional[str] = None
-    description: Optional[str] = None
-    ludopedia_url: Optional[str] = "https://ludopedia.com.br/jogo/azul"
+    ludopedia_url: Optional[str] = None
 
 class BoardgameViewSchema(BaseModel):
     """ Define como um jogo de tabuleiro será retornado.
@@ -21,7 +20,6 @@ class BoardgameViewSchema(BaseModel):
     min_players: int = 2
     max_players: int = 4
     image_url: Optional[str] = None
-    description: Optional[str] = None
     ludopedia_url: Optional[str] = None
 
 
@@ -34,7 +32,6 @@ def show_boardgame(boardgame: Boardgame) -> BoardgameViewSchema:
         "min_players": boardgame.min_players,
         "max_players": boardgame.max_players,
         "image_url": boardgame.image_url,
-        "description": boardgame.description,
         "ludopedia_url": boardgame.ludopedia_url
     }
 
@@ -55,7 +52,6 @@ def show_boardgames(boardgames: List[Boardgame]) -> BoardgameListingSchema:
             "min_players": boardgame.min_players,
             "max_players": boardgame.max_players,
             "image_url": boardgame.image_url,
-            "description": boardgame.description,
             "ludopedia_url": boardgame.ludopedia_url
         })
 

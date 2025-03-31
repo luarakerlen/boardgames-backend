@@ -1,7 +1,5 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
-from urllib.parse import unquote
-
 from sqlalchemy.exc import IntegrityError
 
 from model import Session, Boardgame
@@ -11,6 +9,7 @@ from flask_cors import CORS
 
 info = Info(title="Jogos de tabuleiro API", version="0.0.1")
 app = OpenAPI(__name__, info=info)
+
 CORS(app)
 
 # DEFINIÇÃO DE TAGS
@@ -38,7 +37,6 @@ def add_boardgame(form: BoardgameSchema):
         min_players=form.min_players,
         max_players=form.max_players,
         image_url=form.image_url,
-        description=form.description,
         ludopedia_url=form.ludopedia_url
     )
     logger.debug(
@@ -53,7 +51,7 @@ def add_boardgame(form: BoardgameSchema):
         return show_boardgame(boardgame)
 
     except IntegrityError as e:
-        error_message = f"O jogo de tabuleiro {boardgame.name} já existe na base de dados."
+        error_message = f"O jogo de tabuleiro {boardgame.name} ja existe na base de dados."
         logger.warning(
             f"Erro ao adicionar o jogo de tabuleiro {boardgame.name} na base de dados: {error_message}")
         return {"message": error_message}, 409
