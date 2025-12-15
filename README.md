@@ -21,6 +21,7 @@ A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma 
 
 - Adicionar novos jogos de tabuleiro.
 - Buscar informações de um jogo específico pelo ID.
+- Editar informações de um jogo existente.
 - Listar todos os jogos cadastrados.
 - Remover jogos da base de dados com base no ID.
 
@@ -80,6 +81,64 @@ Antes de começar, certifique-se de ter os seguintes itens instalados:
 
    - Documentação interativa: [http://localhost:5001/openapi](http://localhost:5001/openapi)
    - Status da API: [http://localhost:5001/#/](http://localhost:5001/#/)
+
+---
+
+## Como executar através do Docker
+
+Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instalado e em execução em sua máquina.
+
+Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal. Execute como administrador o seguinte comando para construir a imagem Docker:
+
+```bash
+docker build -t boardgames-api .
+```
+
+Após construir a imagem, execute o container com o seguinte comando:
+
+```bash
+docker run -p 5001:5001 boardgames-api
+```
+
+A API estará disponível em `http://localhost:5001`.
+
+---
+
+## Alguns comandos úteis do Docker
+
+Para verificar se a imagem foi criada você pode executar o seguinte comando:
+
+```bash
+docker images
+```
+
+Caso queira remover uma imagem, basta executar o comando:
+
+```bash
+docker rmi <nome-da-imagem>
+```
+Substituindo `<nome-da-imagem>` pelo nome ou ID da imagem que deseja remover.
+
+Para verificar se o container está em execução você pode executar o seguinte comando:
+
+```bash
+docker container ls --all
+```
+
+Caso queira parar um container, basta executar o comando:
+
+```bash
+docker stop <nome-ou-id-do-container>
+```
+Substituindo `<nome-ou-id-do-container>` pelo nome ou ID do container que deseja parar.
+
+Caso queira destruir um container, basta executar o comando:
+
+```bash
+docker rm <nome-ou-id-do-container>
+```
+
+Para mais comandos, veja a [documentação oficial do Docker](https://docs.docker.com/reference/).
 
 ---
 

@@ -108,7 +108,7 @@ def get_boardgames():
 
 
 @app.delete('/boardgame', tags=[boardgame_tag],
-            responses={"200": ProdutoDelSchema, "404": ErrorSchema})
+            responses={"200": BoardgameDelSchema, "404": ErrorSchema})
 def delete_boardgame(query: BoardgameSearchSchema):
     """ Faz a remoção de um jogo de tabuleiro a partir do id do jogo.
     Retorna uma mensagem de confirmação da remoção.
@@ -132,3 +132,41 @@ def delete_boardgame(query: BoardgameSearchSchema):
         logger.debug(
             f"Jogo de tabuleiro com id {id} removido da base de dados.")
         return {"message": f"Jogo de tabuleiro com id {id} removido da base de dados.", "id": id, "name": name}, 200
+
+
+@app.put('/boardgame', tags=[boardgame_tag],
+         responses={"200": BoardgameViewSchema, "404": ErrorSchema, "400": ErrorSchema, "500": ErrorSchema})
+def update_boardgame(query: BoardgameSearchSchema, form: BoardgameUpdateSchema):
+    """ Atualiza os dados de um jogo de tabuleiro a partir do id do jogo.
+    Retorna uma representação do jogo de tabuleiro atualizado.
+    """
+    id = query.id
+    logger.debug(
+        f"Atualizando o jogo de tabuleiro com id {id} na base de dados.")
+
+    session = Session()
+    boardgame = session.query(Boardgame).filter(Boardgame.id == id).first()
+
+    if not boardgame:
+        error_message = f"Jogo de tabuleiro com id {id} não encontrado na base de dados."
+        logger.warning(
+            f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {error_message}")
+        return {"message": error_message}, 404
+    else:
+        try:
+            update_data = form.dict(exclude_unset=True)
+            update_data = {k: v for k, v in update_data.items() if v is not None}
+            
+            for field, value in update_data.items():
+                setattr(boardgame, field, value)
+
+            session.commit()
+            logger.debug(
+                f"Jogo de tabuleiro com id {id} atualizado na base de dados.")
+            return show_boardgame(boardgame)
+
+        except Exception as e:
+            error_message = f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {str(e)}"
+            logger.warning(
+                f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {str(e)}")
+            return {"message": error_message}, 500

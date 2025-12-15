@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from typing import Optional, List
 from model.boardgame import Boardgame
 
@@ -11,6 +11,24 @@ class BoardgameSchema(BaseModel):
     max_players: int = 4
     image_url: Optional[str] = None
     ludopedia_url: Optional[str] = None
+
+
+class BoardgameUpdateSchema(BaseModel):
+    """ Define como um jogo de tabuleiro pode ser atualizado (campos opcionais).
+    """
+    name: Optional[str] = None
+    min_players: Optional[int] = None
+    max_players: Optional[int] = None
+    image_url: Optional[str] = None
+    ludopedia_url: Optional[str] = None
+
+    @validator("min_players", "max_players", "name", "image_url", "ludopedia_url", pre=True)
+    @classmethod
+    def empty_string_to_none(cls, v):
+        if v == "":
+            return None
+        return v
+
 
 class BoardgameViewSchema(BaseModel):
     """ Define como um jogo de tabuleiro será retornado.
@@ -34,6 +52,7 @@ def show_boardgame(boardgame: Boardgame) -> BoardgameViewSchema:
         "image_url": boardgame.image_url,
         "ludopedia_url": boardgame.ludopedia_url
     }
+
 
 class BoardgameListingSchema(BaseModel):
     """ Define como uma listagem de jogos de tabuleiro será retornada.
@@ -63,7 +82,8 @@ class BoardgameSearchSchema(BaseModel):
     """
     id: int = 1
 
-class ProdutoDelSchema(BaseModel):
+
+class BoardgameDelSchema(BaseModel):
     """ Define como deve ser a estrutura do dado retornado após uma requisição
         de remoção.
     """
