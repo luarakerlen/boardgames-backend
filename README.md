@@ -1,6 +1,6 @@
 # Jogos de Tabuleiro API
 
-Este projeto é uma API para gerenciar informações sobre jogos de tabuleiro. Ele foi desenvolvido como parte do Projeto MVP do curso de Pós-graduação em Engenharia de Software da PUC-Rio, na Sprint de Desenvolvimento Fullstack Básico.
+Este projeto é uma API para gerenciar informações sobre jogos de tabuleiro. Ele foi desenvolvido como parte do Projeto MVP do curso de Pós-graduação em Engenharia de Software da PUC-Rio, na Sprint de Desenvolvimento Fullstack Básico e, posteriormente, foram adicionadas novas funcionalidades para a Sprint de Arquitetura de Software.
 
 A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma base de dados. Além disso, oferece documentação interativa para facilitar o uso.
 
@@ -101,44 +101,6 @@ docker run -p 5001:5001 boardgames-api
 ```
 
 A API estará disponível em `http://localhost:5001`.
-
----
-
-## Alguns comandos úteis do Docker
-
-Para verificar se a imagem foi criada você pode executar o seguinte comando:
-
-```bash
-docker images
-```
-
-Caso queira remover uma imagem, basta executar o comando:
-
-```bash
-docker rmi <nome-da-imagem>
-```
-Substituindo `<nome-da-imagem>` pelo nome ou ID da imagem que deseja remover.
-
-Para verificar se o container está em execução você pode executar o seguinte comando:
-
-```bash
-docker container ls --all
-```
-
-Caso queira parar um container, basta executar o comando:
-
-```bash
-docker stop <nome-ou-id-do-container>
-```
-Substituindo `<nome-ou-id-do-container>` pelo nome ou ID do container que deseja parar.
-
-Caso queira destruir um container, basta executar o comando:
-
-```bash
-docker rm <nome-ou-id-do-container>
-```
-
-Para mais comandos, veja a [documentação oficial do Docker](https://docs.docker.com/reference/).
 
 ---
 

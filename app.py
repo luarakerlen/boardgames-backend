@@ -51,7 +51,7 @@ def add_boardgame(form: BoardgameSchema):
         return show_boardgame(boardgame)
 
     except IntegrityError as e:
-        error_message = f"O jogo de tabuleiro {boardgame.name} ja existe na base de dados."
+        error_message = f"O jogo de tabuleiro {boardgame.name} já existe na base de dados."
         logger.warning(
             f"Erro ao adicionar o jogo de tabuleiro {boardgame.name} na base de dados: {error_message}")
         return {"message": error_message}, 409
@@ -155,8 +155,9 @@ def update_boardgame(query: BoardgameSearchSchema, form: BoardgameUpdateSchema):
     else:
         try:
             update_data = form.dict(exclude_unset=True)
-            update_data = {k: v for k, v in update_data.items() if v is not None}
-            
+            update_data = {k: v for k, v in update_data.items()
+                           if v is not None}
+
             for field, value in update_data.items():
                 setattr(boardgame, field, value)
 
@@ -165,7 +166,21 @@ def update_boardgame(query: BoardgameSearchSchema, form: BoardgameUpdateSchema):
                 f"Jogo de tabuleiro com id {id} atualizado na base de dados.")
             return show_boardgame(boardgame)
 
+        except IntegrityError as e:
+            session.rollback()
+            
+            # Recarregar o objeto para obter o nome atual antes da tentativa de atualização
+            session.refresh(boardgame)
+            current_name = boardgame.name
+            duplicated_name = form.name
+            
+            error_message = f"O jogo de tabuleiro '{duplicated_name}' já existe na base de dados."
+            logger.warning(
+                f"Erro ao atualizar o jogo de tabuleiro {current_name} na base de dados: {error_message}")
+            return {"message": error_message}, 409
+
         except Exception as e:
+            session.rollback()
             error_message = f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {str(e)}"
             logger.warning(
                 f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {str(e)}")
