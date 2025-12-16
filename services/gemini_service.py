@@ -33,6 +33,7 @@ Se nenhum jogo da lista atender à quantidade de jogadores ou às preferências,
 Para cada sugestão, explique brevemente por que o jogo é uma boa escolha para o usuário, relacionando com a quantidade de jogadores e as preferências informadas.
 Seja claro, objetivo e mantenha um tom amigável.
 
+Recomende apenas 1 jogo. Não insira caracteres de formatação na sua resposta.
 Na primeira linha, traga o nome do jogo.
 """
 
