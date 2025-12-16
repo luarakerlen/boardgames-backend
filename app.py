@@ -7,6 +7,7 @@ from schemas import *
 from logger import logger
 from flask_cors import CORS
 from services.gemini_service import GeminiService
+from utils import parse_recommendation
 
 info = Info(title="Jogos de tabuleiro API", version="0.0.1")
 app = OpenAPI(__name__, info=info)
@@ -207,14 +208,16 @@ def recommend_game(body: AIRecommendationSchema):
         game_names = [game.name for game in games]
 
         gemini = GeminiService()
-        recommendation = gemini.recommend_game(
+        raw_recommendation = gemini.recommend_game(
             games=game_names,
-            players=body.players
+            players=body.players,
+            user_preferences=body.user_preferences or ""
         )
+        name, explanation = parse_recommendation(raw_recommendation)
 
         return {
-            "players": body.players,
-            "recommendation": recommendation
+            "name": name,
+            "explanation": explanation
         }
 
     except Exception as e:

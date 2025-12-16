@@ -10,6 +10,8 @@ A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma 
 
 - [Funcionalidades](#funcionalidades)
 - [Pré-requisitos](#pré-requisitos)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Configuração inicial](#configuração-inicial)
 - [Instalação](#instalação)
 - [Como executar](#como-executar)
 - [Estrutura do Projeto](#estrutura-do-projeto)
@@ -21,9 +23,14 @@ A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma 
 
 - Adicionar novos jogos de tabuleiro.
 - Buscar informações de um jogo específico pelo ID.
-- Editar informações de um jogo existente.
 - Listar todos os jogos cadastrados.
 - Remover jogos da base de dados com base no ID.
+
+### Funcionalidades adicionadas na Sprint de Arquitetura de Software
+- Editar informações de um jogo existente.
+- Gerar recomendações de jogos de tabuleiro com auxílio de IA, considerando a quantidade de jogadores e preferências do usuário.
+- Priorizar recomendações com base nos jogos cadastrados na base de dados.
+- Expor endpoint específico para recomendação inteligente de jogos.
 
 ---
 
@@ -34,6 +41,29 @@ Antes de começar, certifique-se de ter os seguintes itens instalados:
 - Python 3.8 ou superior **(recomendado: Python 3.11)**
 - [pip](https://pip.pypa.io/en/stable/)
 - [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) (opcional, mas recomendado)
+
+---
+
+## Variáveis de Ambiente
+
+Este projeto utiliza variáveis de ambiente para integração com serviços externos de IA.
+
+Crie um arquivo chamado `.env` na raiz do projeto com o seguinte conteúdo:
+
+```
+GEMINI_API_KEY=coloque_sua_chave_aqui
+```
+
+**Importante:**
+- Nunca versione sua chave real.
+- O arquivo `.env` deve ser incluído no `.gitignore`.
+- Para fins de documentação, este repositório inclui apenas as instruções de criação do arquivo, não o valor real da chave.
+
+---
+
+## Configuração inicial
+
+Após clonar o projeto e instalar as dependências, configure as variáveis de ambiente conforme descrito na seção **Variáveis de Ambiente** antes de executar a aplicação.
 
 ---
 
@@ -110,6 +140,7 @@ A API estará disponível em `http://localhost:5001`.
 - **model/**: Define os modelos de dados e a estrutura do banco de dados.
 - **schemas/**: Define os esquemas de validação e serialização dos dados.
 - **requirements.txt**: Lista de dependências do projeto.
+- **services/**: Camada de serviços externos, incluindo integração com IA (Gemini).
 
 ---
 
