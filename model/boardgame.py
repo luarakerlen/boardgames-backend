@@ -1,6 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, Float
-from sqlalchemy.orm import relationship
-from datetime import datetime
+from sqlalchemy import Column, String, Integer
 from typing import Union
 
 from model import Base

@@ -2,10 +2,11 @@ from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
 from sqlalchemy.exc import IntegrityError
 
-from model import Session, Boardgame
+from model import Session, Boardgame, BoardgameRecommendationResponse
 from schemas import *
 from logger import logger
 from flask_cors import CORS
+from services.gemini_service import GeminiService
 
 info = Info(title="Jogos de tabuleiro API", version="0.0.1")
 app = OpenAPI(__name__, info=info)
@@ -17,7 +18,10 @@ home_tag = Tag(name="Documentação",
                description="Seleção de documentação: Swagger, Redoc ou RapiDoc.")
 boardgame_tag = Tag(name="Jogos de Tabuleiro",
                     description="Adição, visualização e remoção de jogos de tabuleiro na base de dados.")
-
+ai_tag = Tag(
+    name="Inteligência Artificial",
+    description="Recomendação de jogos usando IA generativa"
+)
 
 @app.get('/', tags=[home_tag])
 def home():
@@ -185,3 +189,34 @@ def update_boardgame(query: BoardgameSearchSchema, form: BoardgameUpdateSchema):
             logger.warning(
                 f"Erro ao atualizar o jogo de tabuleiro com id {id} na base de dados: {str(e)}")
             return {"message": error_message}, 500
+
+# Integração com AI
+@app.post(
+    "/ai/recommendation",
+    tags=[ai_tag],
+    responses={200: BoardgameRecommendationResponse, 500: ErrorSchema}
+)
+def recommend_game(body: AIRecommendationSchema):
+    try:
+        session = Session()
+        games = session.query(Boardgame).all()
+
+        if not games:
+            return {"message": "Nenhum jogo cadastrado."}, 400
+
+        game_names = [game.name for game in games]
+
+        gemini = GeminiService()
+        recommendation = gemini.recommend_game(
+            games=game_names,
+            players=body.players
+        )
+
+        return {
+            "players": body.players,
+            "recommendation": recommendation
+        }
+
+    except Exception as e:
+        logger.error(f"Erro na recomendação por IA: {str(e)}")
+        return {"message": "Erro ao gerar recomendação"}, 500

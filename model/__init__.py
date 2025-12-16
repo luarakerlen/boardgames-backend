@@ -5,6 +5,7 @@ import os
 
 from model.base import Base
 from model.boardgame import Boardgame
+from model.ai_response import BoardgameRecommendationResponse
 
 db_path = "database/"
 
