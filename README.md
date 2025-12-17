@@ -6,6 +6,8 @@ A API permite adicionar, visualizar, editar, listar e remover jogos de tabuleiro
 
 A API também faz integração com uma API externa, a API do Gemini, para trazer recomendações de jogos para o usuário, utilizando a lista de jogos disponíveis no banco de dados.
 
+Esse é a parte do **backend** do projeto. O **frontend** que faz as chamadas neste projeto pode ser encontrado neste link: [boardgames-frontend](https://github.com/luarakerlen/boardgames-frontend).
+
 ---
 
 ## Índice
@@ -124,13 +126,13 @@ Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instala
 Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal. Execute como administrador o seguinte comando para construir a imagem Docker:
 
 ```bash
-docker build -t boardgames-api .
+docker build -t boardgames-backend .
 ```
 
 Após construir a imagem, execute o container com o seguinte comando:
 
 ```bash
-docker run -p 5001:5001 boardgames-api
+docker run -p 5001:5001 boardgames-backend
 ```
 
 A API estará disponível em `http://localhost:5001`.
