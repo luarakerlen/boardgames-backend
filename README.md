@@ -169,6 +169,60 @@ Imagem do modelo arquitetural:
 
 ---
 
+## Integração com API Externa (Inteligência Artificial)
+
+Este backend realiza integração com uma **API externa de Inteligência Artificial** para geração de recomendações de jogos de tabuleiro, com base na quantidade de jogadores e nas preferências informadas pelo usuário.
+
+Toda a comunicação com a API externa é centralizada no backend, garantindo **segurança**, **encapsulamento das regras de negócio** e **desacoplamento do frontend**.
+
+### API Externa Utilizada
+
+- **Nome:** Google Gemini API  
+- **Fornecedor:** Google  
+- **Finalidade:** Geração de conteúdo textual por meio de modelos de linguagem, utilizada neste projeto para recomendar jogos de tabuleiro.  
+- **Site oficial:** https://ai.google.dev/
+
+### Licença de Uso
+
+A Google Gemini API é disponibilizada conforme os **termos de uso da Google**, com planos gratuitos e pagos, sujeitos a limites de requisições e políticas de uso.
+
+Termos de uso: https://ai.google.dev/terms
+
+### Cadastro e Autenticação
+
+Para utilização da API externa é necessário:
+
+1. Criar um projeto no **Google AI Studio**.
+2. Gerar uma **API Key**.
+3. Configurar a chave como variável de ambiente no backend.
+
+Exemplo de variável de ambiente utilizada:
+
+```env
+GEMINI_API_KEY=chave_da_api_aqui
+```
+
+**Importante**: A chave de acesso não é versionada e não é exposta ao frontend.
+
+### Modelo e Método Utilizados
+
+A integração com a API do Gemini é realizada por meio da biblioteca oficial do Google para Python, utilizando o seguinte recurso:
+- Método: `models.generate_content`
+- Modelo: `gemini-2.5-flash`
+- Formato de entrada: Prompt textual estruturado
+- Formato de saída: Texto gerado com nome do jogo recomendado e explicação
+
+### Rota da API que Consome a IA
+
+O backend expõe a seguinte rota para o consumo da funcionalidade de IA:
+- Método: POST
+- Endpoint: `/ai/recommendation`
+- Descrição: Retorna uma recomendação de jogo de tabuleiro baseada na quantidade de jogadores e nas preferências do usuário.
+
+O frontend consome exclusivamente essa rota, sem acesso direto à API externa de Inteligência Artificial.
+
+---
+
 ## 👩🏽‍💻 Autora
 
 <a href="https://www.linkedin.com/in/luarakerlen/" target="_blank">
