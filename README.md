@@ -2,7 +2,9 @@
 
 Este projeto é uma API para gerenciar informações sobre jogos de tabuleiro. Ele foi desenvolvido como parte do Projeto MVP do curso de Pós-graduação em Engenharia de Software da PUC-Rio, na Sprint de Desenvolvimento Fullstack Básico e, posteriormente, foram adicionadas novas funcionalidades para a Sprint de Arquitetura de Software.
 
-A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma base de dados. Além disso, oferece documentação interativa para facilitar o uso.
+A API permite adicionar, visualizar, editar, listar e remover jogos de tabuleiro de uma base de dados. Além disso, oferece documentação interativa para facilitar o uso.
+
+A API também faz integração com uma API externa, a API do Gemini, para trazer recomendações de jogos para o usuário, utilizando a lista de jogos disponíveis no banco de dados.
 
 ---
 
@@ -15,6 +17,7 @@ A API permite adicionar, visualizar, listar e remover jogos de tabuleiro de uma 
 - [Instalação](#instalação)
 - [Como executar](#como-executar)
 - [Estrutura do Projeto](#estrutura-do-projeto)
+- [Arquitetura da Solução](#arquitetura-da-solução)
 - [Autora](#👩🏽‍💻-autora)
 
 ---
@@ -141,6 +144,28 @@ A API estará disponível em `http://localhost:5001`.
 - **schemas/**: Define os esquemas de validação e serialização dos dados.
 - **requirements.txt**: Lista de dependências do projeto.
 - **services/**: Camada de serviços externos, incluindo integração com IA (Gemini).
+
+---
+
+## Arquitetura da Solução
+
+Este projeto segue o Cenário 1.1 de Arquitetura, onde:
+
+- O frontend se comunica com um backend próprio;
+
+- O backend é responsável por:
+
+  - Persistência dos dados em banco de dados
+
+  - Comunicação com uma API externa de IA para geração de recomendações
+
+### Diagrama da Arquitetura
+
+> Cenário 1.1 – Frontend conectado ao backend, que por sua vez integra com uma API externa e um banco de dados.
+
+Imagem do modelo arquitetural:
+
+![Diagrama de Arquitetura – Cenário 1.1](./arquitetura-cenario-1-1.png)
 
 ---
 

@@ -9,7 +9,7 @@ from flask_cors import CORS
 from services.gemini_service import GeminiService
 from utils import parse_recommendation
 
-info = Info(title="Jogos de tabuleiro API", version="0.0.1")
+info = Info(title="Jogos de tabuleiro API", version="1.0.1")
 app = OpenAPI(__name__, info=info)
 
 CORS(app)
